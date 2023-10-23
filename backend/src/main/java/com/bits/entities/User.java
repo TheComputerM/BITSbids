@@ -2,6 +2,7 @@ package com.bits.entities;
 
 import java.util.UUID;
 
+import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -10,7 +11,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "users")
-public class User {
+public class User extends PanacheEntityBase {
   @Id
   @GeneratedValue
   public UUID id;
@@ -18,6 +19,6 @@ public class User {
   @Column(nullable = false)
   public String name;
 
-  @Column(nullable = false, columnDefinition = "int default 0")
+  @Column(columnDefinition = "integer default 0")
   public Integer balance;
 }
