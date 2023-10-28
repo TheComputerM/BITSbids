@@ -14,7 +14,7 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name="message")
 public class Message extends PanacheEntityBase{
-    @ID
+    @Id
     @GeneratedValue
     public UUID id;
 

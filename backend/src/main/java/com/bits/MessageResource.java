@@ -17,7 +17,7 @@ public class MessageResource{
 
     @GET
     public List<Message> getAll(){
-        return Message.listAll()
+        return Message.listAll();
     }
 
     @POST
