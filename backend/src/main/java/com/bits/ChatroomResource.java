@@ -3,7 +3,7 @@ package com.bits;
 import java.util.List;
 import java.util.UUID;
 
-import com.bits.entities.User;
+import com.bits.entities.Chatroom;
 
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.Consumes;
