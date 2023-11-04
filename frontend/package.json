@@ -3,6 +3,7 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
+    "prepare": "panda codegen",
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro check && astro build",
@@ -10,10 +11,16 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@ark-ui/solid": "1.0.0-beta.3",
     "@astrojs/check": "^0.3.1",
     "@astrojs/solid-js": "^3.0.2",
     "astro": "^3.4.3",
     "solid-js": "^1.4.3",
     "typescript": "^5.2.2"
+  },
+  "devDependencies": {
+    "@pandacss/astro": "^0.17.5",
+    "@pandacss/dev": "^0.17.5",
+    "@park-ui/panda-preset": "^0.20.0"
   }
 }
