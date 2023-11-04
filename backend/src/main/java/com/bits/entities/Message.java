@@ -7,28 +7,31 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Lob;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="message")
-public class Message extends PanacheEntityBase{
-    @Id
-    @GeneratedValue
-    public UUID id;
+@Table(name = "message")
+public class Message extends PanacheEntityBase {
+  @Id
+  @GeneratedValue
+  public UUID id;
 
-    @Column
-    @GeneratedValue
-    public UUID roomid;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "room_id")
+  public Chatroom room;
 
-    @Column
-    public String contents;
+  @Lob
+  public String content;
 
-    @Column
-    public String caption;
+  public String caption;
 
-    @Column
-    @CreationTimestamp
-    public Instant sentAt;
+  @Column(name = "sent_at")
+  @CreationTimestamp
+  public Instant sentAt;
 }

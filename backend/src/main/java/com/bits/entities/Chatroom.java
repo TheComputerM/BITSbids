@@ -1,13 +1,17 @@
 package com.bits.entities;
 
 import java.time.Instant;
+import java.util.List;
 import java.util.UUID;
 
-import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 
+import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -18,11 +22,16 @@ public class Chatroom extends PanacheEntityBase {
     @GeneratedValue
     public UUID id;
 
-    public UUID product_id;
+    public Product product;
 
-    public UUID buyer_id;
+    public User buyer;
 
-    public Instant buyer_last_read;
+    @Column(name = "buyer_last_read")
+    public Instant buyerLastRead;
 
-    public Instant seller_last_read;
+    @Column(name = "seller_last_read")
+    public Instant sellerLastRead;
+
+    @OneToMany(mappedBy = "room", fetch = FetchType.LAZY)
+    public List<Message> messages;
 }

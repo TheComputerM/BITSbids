@@ -12,6 +12,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -22,21 +24,18 @@ public class Bids extends PanacheEntityBase {
     @GeneratedValue
     public UUID id;
 
-    @GeneratedValue
-    @Column
-    public UUID product_id;
-    // to be made foreign key later
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    public Product product;
 
-    @GeneratedValue
-    @Column
-    public UUID bidder_id;
-    // to be made foreign key later
+    @ManyToOne
+    @JoinColumn(name = "bidder_id")
+    public User bidder;
 
-    @Column(columnDefinition = "integer default 0")
     public Integer amount;
 
-    @Column
+    @Column(name = "created_at")
     @CreationTimestamp
-    public Instant created_at;
+    public Instant createdAt;
 
 }
