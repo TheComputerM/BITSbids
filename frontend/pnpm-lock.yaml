@@ -14,11 +14,17 @@ dependencies:
   '@astrojs/solid-js':
     specifier: ^3.0.2
     version: 3.0.2(solid-js@1.8.5)(vite@4.5.0)
+  '@fontsource-variable/inter':
+    specifier: ^5.0.15
+    version: 5.0.15
   astro:
     specifier: ^3.4.3
     version: 3.4.3(typescript@5.2.2)
+  solid-icons:
+    specifier: ^1.1.0
+    version: 1.1.0(solid-js@1.8.5)
   solid-js:
-    specifier: ^1.4.3
+    specifier: ^1.8.5
     version: 1.8.5
   typescript:
     specifier: ^5.2.2
@@ -1339,6 +1345,10 @@ packages:
 
   /@floating-ui/utils@0.1.6:
     resolution: {integrity: sha512-OfX7E2oUDYxtBvsuS4e/jSn4Q9Qb6DzgeYtsAdkPZ47znpoNsMgZw0+tVijiv3uGNR6dgNlty6r9rzIzHjtd/A==}
+
+  /@fontsource-variable/inter@5.0.15:
+    resolution: {integrity: sha512-CdQPQQgOVxg6ifmbrqYZeUqtQf7p2wPn6EvJ4M+vdNnsmYZgYwPPPQDNlIOU7LCUlSGaN26v6H0uA030WKn61g==}
+    dev: false
 
   /@internationalized/date@3.5.0:
     resolution: {integrity: sha512-nw0Q+oRkizBWMioseI8+2TeUPEyopJVz5YxoYVzR0W1v+2YytiYah7s/ot35F149q/xAg4F1gT/6eTd+tsUpFQ==}
@@ -7088,6 +7098,14 @@ packages:
 
   /sisteransi@1.0.5:
     resolution: {integrity: sha512-bLGGlR1QxBcynn2d5YmDX4MGjlZvy2MRBDRNHLJ8VI6l6+9FUiyTFNJ0IveOSP0bcXgVDPRcfGqA0pjaqUpfVg==}
+
+  /solid-icons@1.1.0(solid-js@1.8.5):
+    resolution: {integrity: sha512-IesTfr/F1ElVwH2E1110s2RPXH4pujKfSs+koT8rwuTAdleO5s26lNSpqJV7D1+QHooJj18mcOiz2PIKs0ic+A==}
+    peerDependencies:
+      solid-js: '*'
+    dependencies:
+      solid-js: 1.8.5
+    dev: false
 
   /solid-js@1.8.5:
     resolution: {integrity: sha512-xvtJvzJzWbsn35oKFhW9kNwaxG1Z/YLMsDp4tLVcYZTMPzvzQ8vEZuyDQ6nt7xDArVgZJ7TUFrJUwrui/oq53A==}

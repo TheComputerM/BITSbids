@@ -1,0 +1,42 @@
+---
+import "@fontsource-variable/inter";
+import { css } from "styled-system/css";
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = "TODO" } = Astro.props as Props;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <style>
+      :root {
+        --font-body: "Inter Variable";
+      }
+    </style>
+    <slot name="head" />
+  </head>
+  <body class={css({fontFamily: "body"})}>
+    <slot />
+  </body>
+</html>
+
+<script>
+  // Checks if the theme-mode is already set by user otherwise picks up the system theme
+  const themeMode =
+    localStorage.getItem("theme-mode") ??
+    (window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? "dark"
+      : "light");
+  localStorage.setItem("theme-mode", themeMode);
+  document.documentElement.setAttribute("data-color-mode", themeMode);
+</script>

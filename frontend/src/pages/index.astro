@@ -1,15 +1,68 @@
 ---
+import { Center, Flex, HStack, Stack } from "styled-system/jsx";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { Text } from "~/components/ui/typography";
+import { TbChartLine } from "solid-icons/tb";
+import { SiGoogle } from "solid-icons/si";
+import UserAvatars from "./_/user-avatars";
+import { Button } from "~/components/ui/button";
+import ThemeSwitcher from "~/components/ThemeSwitcher";
+import { Heading } from "~/components/ui/heading";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout title="BITSbids">
+  <Flex direction={{ base: "column", md: "row" }}>
+    <Flex
+      direction="column"
+      px={{ base: "6", md: "lg" }}
+      bg="bg.subtle"
+      height={{ base: "90vh", md: "100vh" }}
+    >
+      <Flex align="center" justify="space-between" h="24">
+        <TbChartLine size={32} />
+        <ThemeSwitcher client:idle />
+      </Flex>
+      <Flex flex="1" align="center">
+        <Stack gap="8">
+          <Stack gap="6">
+            <Heading textStyle="5xl">
+              Join the BITSBids community.
+            </Heading>
+
+            <Text textStyle="lg" maxW="lg" color="fg.muted">
+              The best java powered bidding platform for bitsians where you can
+              buy and sell goods hassle-free and quick.
+            </Text>
+          </Stack>
+
+          <HStack gap="4">
+            <HStack gap="0">
+              <UserAvatars client:idle />
+            </HStack>
+            <Text fontWeight="medium">Join 10.000+ BITSians</Text>
+          </HStack>
+        </Stack>
+      </Flex>
+      <Flex align="center" h="24">
+        <Text color="fg.subtle" textStyle="sm">
+          © 2023 All rights reserved.
+        </Text>
+      </Flex>
+    </Flex>
+    <Center flex="1" py="24" px="8">
+      <Stack textAlign="center" gap="4">
+        <Heading as="h2" textStyle="3xl">
+          Log in to your account
+        </Heading>
+        <Text color="fg.muted">Use your BITS Account</Text>
+        <Button size="xl">
+          <SiGoogle />
+          Sign in with Google
+        </Button>
+        <Text as="p" color="fg.muted" fontSize="sm">
+          By signing in, you agree to our <u>Terms and Conditions</u>.
+        </Text>
+      </Stack>
+    </Center>
+  </Flex>
+</BaseLayout>
