@@ -7,5 +7,6 @@ export default defineConfig({
   integrations: [solidJs(), pandacss()],
   server: {
     port: 3000
-  }
+  },
+  output: "server"
 });
