@@ -23,6 +23,6 @@
   "devDependencies": {
     "@pandacss/astro": "^0.17.5",
     "@pandacss/dev": "^0.17.5",
-    "@park-ui/panda-preset": "^0.20.0"
+    "@park-ui/panda-preset": "^0.21.0"
   }
 }
