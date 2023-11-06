@@ -1,5 +1,5 @@
 import { Menu } from "~/components/ui/menu";
-import { Avatar } from "../ui/avatar";
+import { Avatar } from "~/components/ui/avatar";
 import { Portal } from "solid-js/web";
 import { HStack } from "styled-system/jsx";
 import { TbBuildingStore, TbGavel, TbLogout, TbUser } from "solid-icons/tb";
@@ -10,7 +10,7 @@ export default function UserProfile() {
       <Menu.Trigger cursor="pointer" ml="1.5">
         <Avatar size="sm">
           <Avatar.Fallback>PA</Avatar.Fallback>
-          <Avatar.Image src="https://i.pravatar.cc/300" alt="avatar" />
+          <Avatar.Image src="https://i.pravatar.cc/300" alt="Avatar" />
         </Avatar>
       </Menu.Trigger>
       <Portal>
