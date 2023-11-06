@@ -7,7 +7,7 @@ import { TbBuildingStore, TbGavel, TbLogout, TbUser } from "solid-icons/tb";
 export default function UserProfile() {
   return (
     <Menu positioning={{ placement: "bottom-end", offset: { crossAxis: -24 } }}>
-      <Menu.Trigger cursor="pointer" mx="1.5">
+      <Menu.Trigger cursor="pointer" ml="1.5">
         <Avatar size="sm">
           <Avatar.Fallback>PA</Avatar.Fallback>
           <Avatar.Image src="https://i.pravatar.cc/300" alt="avatar" />
