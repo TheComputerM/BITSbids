@@ -1,11 +1,28 @@
 ---
-import { Container } from "styled-system/jsx";
+import { Container, HStack } from "styled-system/jsx";
 import ChatInput from "./_/chat-input";
+import ChatMessage from "./_/chat-message";
 import AppLayout from "~/layouts/AppLayout.astro";
+import { TbChevronLeft } from "solid-icons/tb";
+import Profile from "~/components/Profile";
+import { Text } from "~/components/ui/typography";
+import { iconButton } from "styled-system/recipes";
 ---
 
 <AppLayout title="Chatroom">
-  <Container>
+  <Container bg="bg.subtle">
+    <HStack h="14">
+      <a href="../chat" class={iconButton({ variant: "ghost" })}>
+        <TbChevronLeft />
+      </a>
+      <Profile client:idle fallback="PA" image="https://i.pravatar.cc/300" />
+      <Text fontWeight="semibold">User</Text>
+    </HStack>
+  </Container>
+
+  <Container display="flex" flexDirection="column" py="4" gap="6">
+    <ChatMessage message="Hi" fromUser={true} />
+    <ChatMessage message="Hello There" />
     <ChatInput />
   </Container>
 </AppLayout>

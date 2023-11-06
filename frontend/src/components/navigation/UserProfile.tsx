@@ -2,7 +2,13 @@ import { Menu } from "~/components/ui/menu";
 import { Avatar } from "~/components/ui/avatar";
 import { Portal } from "solid-js/web";
 import { HStack } from "styled-system/jsx";
-import { TbBuildingStore, TbGavel, TbLogout, TbUser } from "solid-icons/tb";
+import {
+  TbBuildingStore,
+  TbGavel,
+  TbLogout,
+  TbMessage,
+  TbUser,
+} from "solid-icons/tb";
 
 export default function UserProfile() {
   return (
@@ -20,6 +26,12 @@ export default function UserProfile() {
               <HStack gap="2">
                 <TbUser />
                 Profile
+              </HStack>
+            </Menu.Item>
+            <Menu.Item id="chat">
+              <HStack gap="2">
+                <TbMessage />
+                Chats
               </HStack>
             </Menu.Item>
             <Menu.Item id="profile/bids">
