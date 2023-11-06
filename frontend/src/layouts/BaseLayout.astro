@@ -1,5 +1,6 @@
 ---
 import "@fontsource-variable/inter";
+import { ViewTransitions } from "astro:transitions";
 import { css } from "styled-system/css";
 
 interface Props {
@@ -24,6 +25,7 @@ const { title, description = "TODO" } = Astro.props as Props;
       }
     </style>
     <slot name="head" />
+    <ViewTransitions />
   </head>
   <body class={css({ fontFamily: "body" })}>
     <slot />

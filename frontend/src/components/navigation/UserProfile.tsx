@@ -9,10 +9,14 @@ import {
   TbMessage,
   TbUser,
 } from "solid-icons/tb";
+import { navigate } from "astro:transitions/client";
 
 export default function UserProfile() {
   return (
-    <Menu positioning={{ placement: "bottom-end", offset: { crossAxis: -24 } }}>
+    <Menu
+      positioning={{ placement: "bottom-end", offset: { crossAxis: -24 } }}
+      onSelect={(id) => navigate(`/app/${id.value}`)}
+    >
       <Menu.Trigger cursor="pointer" ml="1.5">
         <Avatar size="sm">
           <Avatar.Fallback>PA</Avatar.Fallback>
