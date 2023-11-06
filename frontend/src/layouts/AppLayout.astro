@@ -1,0 +1,39 @@
+---
+import { Container, Divider, HStack } from "styled-system/jsx";
+import BaseLayout from "./BaseLayout.astro";
+import { SiGithub } from "solid-icons/si";
+import { TbChartLine } from "solid-icons/tb";
+import ThemeSwitcher from "~/components/ThemeSwitcher";
+import UserProfile from "~/components/navigation/UserProfile";
+import { css } from "styled-system/css";
+import { button, iconButton } from "styled-system/recipes";
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = "TODO" } = Astro.props as Props;
+---
+
+<BaseLayout {title} {description}>
+  <Divider>
+    <Container py="1.5">
+      <HStack justify="space-between">
+        <TbChartLine size={24} />
+        <HStack gap="0">
+          <a
+            target="_blank"
+            href="https://github.com/TheComputerM/BITSbids"
+            class={iconButton({ variant: "ghost" })}
+          >
+            <SiGithub />
+          </a>
+          <ThemeSwitcher client:load />
+          <UserProfile client:idle />
+        </HStack>
+      </HStack>
+    </Container>
+  </Divider>
+  <slot />
+</BaseLayout>
