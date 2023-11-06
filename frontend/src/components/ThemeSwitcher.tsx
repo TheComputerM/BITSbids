@@ -1,6 +1,6 @@
 import { TbSunFilled, TbMoonFilled } from "solid-icons/tb";
 import { css } from "styled-system/css";
-import { Button } from "./ui/button";
+import { IconButton } from "./ui/icon-button";
 
 function toggleTheme() {
   const newTheme =
@@ -11,9 +11,9 @@ function toggleTheme() {
 
 export default function ThemeSwitcher() {
   return (
-    <Button variant="ghost" px="0" onClick={toggleTheme}>
+    <IconButton variant="ghost" onClick={toggleTheme}>
       <TbSunFilled size={24} class={css({ _light: { display: "none" } })} />
       <TbMoonFilled size={24} class={css({ _dark: { display: "none" } })} />
-    </Button>
+    </IconButton>
   );
 }
