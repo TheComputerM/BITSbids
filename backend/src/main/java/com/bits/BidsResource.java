@@ -3,7 +3,7 @@ package com.bits;
 import java.util.List;
 import java.util.UUID;
 
-import com.bits.entities.Bids;
+import com.bits.entities.Bid;
 
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.Consumes;
@@ -16,14 +16,14 @@ import jakarta.ws.rs.core.MediaType;
 public class BidsResource {
 
   @GET
-  public List<Bids> getAll() {
-    return Bids.listAll();
+  public List<Bid> getAll() {
+    return Bid.listAll();
   }
 
   @POST
   @Transactional
   @Consumes(MediaType.APPLICATION_JSON)
-  public UUID create(Bids bids) {
+  public UUID create(Bid bids) {
     bids.persist();
     return bids.id;
   }
