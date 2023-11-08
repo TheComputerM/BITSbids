@@ -24,8 +24,8 @@ public class Chatroom extends PanacheEntityBase {
   public UUID id;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "product_id")
-  public Product product;
+  @JoinColumn(name = "seller_id")
+  public User seller;
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "buyer_id")
