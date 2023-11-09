@@ -6,14 +6,12 @@ import java.util.UUID;
 import com.bits.entities.Bid;
 
 import jakarta.transaction.Transactional;
-import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
-import jakarta.ws.rs.core.MediaType;
 
-@Path("/bids")
-public class BidsResource {
+@Path("/bid")
+public class BidResource {
 
   @GET
   public List<Bid> getAll() {
@@ -22,9 +20,8 @@ public class BidsResource {
 
   @POST
   @Transactional
-  @Consumes(MediaType.APPLICATION_JSON)
-  public UUID create(Bid bids) {
-    bids.persist();
-    return bids.id;
+  public UUID create(Bid bid) {
+    bid.persist();
+    return bid.id;
   }
 }
