@@ -34,8 +34,7 @@ public class Product extends PanacheEntityBase {
   
   public String name;
 
-  // We mark this field as Lob, which means a Large OBject
-  @Lob
+  @Column(columnDefinition = "TEXT")
   public String description;
 
   public String[] attachments;
