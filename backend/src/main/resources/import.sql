@@ -11,6 +11,12 @@ INSERT INTO "users" ("balance", "id", "avatar", "name") VALUES
 (300, '18062a20-5738-4126-90f5-4e48fdfa5afd',	'https://i.pravatar.cc/300?img=3', 'Eshaan Sudan'),
 (400, '0330bb23-2566-4456-b8a7-f11bd2b45462',	'https://i.pravatar.cc/300?img=4', 'Praharsh Vitta');
 
+
+INSERT INTO "chatroom" ("buyer_last_read", "seller_last_read", "buyer_id", "id", "seller_id") VALUES
+('2023-10-09 17:18:57.491209+00',	'2023-11-09 17:18:57.491209+00',	'874f37f8-0fe4-4b4f-ab56-af67d61a67ef',	'68d7183a-bfa2-4350-90cb-6788051a72d8',	'0330bb23-2566-4456-b8a7-f11bd2b45462'),
+('2023-11-08 17:19:40.440876+00',	'2023-11-09 17:19:40.440876+00',	'cc0828fe-af80-498b-b4a0-cbb1a162debd',	'f436e0f6-4779-45a1-a6fd-ed5ee34e4d9b',	'18062a20-5738-4126-90f5-4e48fdfa5afd'),
+('2023-11-5 7:20:13.157245+00',	'2023-11-09 10:20:13.157245+00',	'0330bb23-2566-4456-b8a7-f11bd2b45462',	'99b637d2-ec1f-4d46-9514-fb79c2d9762b',	'cc0828fe-af80-498b-b4a0-cbb1a162debd');
+
 INSERT INTO "product" ("auto_sell_price", "base_price", "sold", "created_at", "ending_at", "id", "seller_id", "description", "name", "attachments") VALUES
 (75,	40,	't',	'2023-11-09 21:36:23+00',	'2023-11-21 12:00:00+00',	'e80dc27a-e06a-4ac0-b7c0-d26df81190b3',	'cc0828fe-af80-498b-b4a0-cbb1a162debd',	'Official Premier League 2023/24 football, size 5',	'PL football',	'{''https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/c04cb3fb-9298-4f30-bda1-a03bb21b84a9/premier-league-flight-soccer-ball-dM9sq5.png''}'),
 (35,	15,	'f',	'2023-11-12 15:08:34+00',	'2023-11-25 16:00:00+00',	'8d76f031-13c4-448b-b0c1-eb908c72a25c',	'18062a20-5738-4126-90f5-4e48fdfa5afd',	'Portrait orientation, 30Lx28W centimeters',	'Vinland Saga poster',	'{''https://m.media-amazon.com/images/I/51RWgA4tFlL._SX300_SY300_QL70_FMwebp_.jpg''}'),
@@ -21,3 +27,4 @@ INSERT INTO "bid" ("amount", "created_at", "bidder_id", "id", "product_id") VALU
 (55,	'2023-11-09 22:26:03+00',	'0330bb23-2566-4456-b8a7-f11bd2b45462',	'55fea540-19a9-4a08-9dca-f8c47a150457',	'e80dc27a-e06a-4ac0-b7c0-d26df81190b3'),
 (38,	'2023-11-17 11:16:43+00',	'cc0828fe-af80-498b-b4a0-cbb1a162debd',	'7fb2c985-ebc2-4bcc-b7ee-07ffcc2ba0e7',	'f55eb21b-5a4d-41f0-a8f5-e8aa6a931d85'),
 (45,	'2023-11-18 17:35:21+00',	'874f37f8-0fe4-4b4f-ab56-af67d61a67ef',	'f17197f3-8c16-4c85-93cd-ccbc2ce28754',	'f55eb21b-5a4d-41f0-a8f5-e8aa6a931d85');
+
