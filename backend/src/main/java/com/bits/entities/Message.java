@@ -11,7 +11,6 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
@@ -26,10 +25,10 @@ public class Message extends PanacheEntityBase {
   @JoinColumn(name = "room_id")
   public Chatroom room;
 
-  @Lob
+  @Column(columnDefinition = "TEXT")
   public String content;
 
-  public String caption;
+  public String attachment;
 
   @Column(name = "sent_at")
   @CreationTimestamp
