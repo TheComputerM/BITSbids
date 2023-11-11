@@ -8,6 +8,8 @@ import UserAvatars from "./_/user-avatars";
 import ThemeSwitcher from "~/components/theme-switcher";
 import { Heading } from "~/components/ui/heading";
 import { button } from "styled-system/recipes";
+
+const session = await Astro.locals.auth.validate();
 ---
 
 <BaseLayout title="BITSbids">
@@ -51,10 +53,18 @@ import { button } from "styled-system/recipes";
       <Stack textAlign="center" gap="4">
         <Heading as="h2" textStyle="3xl">Log in to your account</Heading>
         <Text color="fg.muted">Use your BITS Account</Text>
-        <a href="/login/google" class={button({ size: "xl" })}>
-          <SiGoogle />
-          Sign in with Google
-        </a>
+        {
+          session ? (
+            <a href="/app" class={button({ size: "xl" })}>
+              Enter BITSBids
+            </a>
+          ) : (
+            <a href="/login/google" class={button({ size: "xl" })}>
+              <SiGoogle />
+              Sign in with Google
+            </a>
+          )
+        }
         <Text as="p" color="fg.muted" fontSize="sm">
           By signing in, you agree to our <u>Terms and Conditions</u>.
         </Text>

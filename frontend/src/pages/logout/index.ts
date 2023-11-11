@@ -2,7 +2,7 @@ import { auth } from "~/lib/lucia";
 
 import type { APIRoute } from "astro";
 
-export const post: APIRoute = async (context) => {
+export const POST: APIRoute = async (context) => {
 	const session = await context.locals.auth.validate();
 	if (!session) {
 		return new Response("Unauthorized", {
@@ -13,5 +13,5 @@ export const post: APIRoute = async (context) => {
 	await auth.invalidateSession(session.sessionId);
 	// delete session cookie
 	context.locals.auth.setSession(null);
-	return context.redirect("/login", 302);
+	return context.redirect("/", 302);
 };

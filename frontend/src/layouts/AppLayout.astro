@@ -1,12 +1,7 @@
 ---
-import { Container, Divider, HStack } from "styled-system/jsx";
 import BaseLayout from "./BaseLayout.astro";
-import { SiGithub } from "solid-icons/si";
-import { TbChartLine } from "solid-icons/tb";
-import ThemeSwitcher from "~/components/theme-switcher";
-import UserProfile from "~/components/navigation/user-profile";
+import Navbar from "~/components/navigation/navbar.astro";
 import { css } from "styled-system/css";
-import { iconButton } from "styled-system/recipes";
 
 interface Props {
   title: string;
@@ -17,26 +12,7 @@ const { title, description = "TODO" } = Astro.props as Props;
 ---
 
 <BaseLayout {title} {description}>
-  <Divider position="fixed">
-    <Container>
-      <HStack h="14" justify="space-between">
-        <a href="/app">
-          <TbChartLine size={24} />
-        </a>
-        <HStack gap="0">
-          <a
-            target="_blank"
-            href="https://github.com/TheComputerM/BITSbids"
-            class={iconButton({ variant: "ghost" })}
-          >
-            <SiGithub />
-          </a>
-          <ThemeSwitcher client:load />
-          <UserProfile avatar="https://i.pravatar.cc/300" client:idle />
-        </HStack>
-      </HStack>
-    </Container>
-  </Divider>
+  <Navbar />
   <div class={css({ pt: "14" })}>
     <slot />
   </div>

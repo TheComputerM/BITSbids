@@ -1,10 +1,11 @@
 package com.bits.entities;
 
 import java.time.Instant;
-import java.util.List;
 import java.util.UUID;
 
 import org.hibernate.annotations.CreationTimestamp;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import jakarta.persistence.Column;
@@ -14,7 +15,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -24,12 +24,10 @@ public class Product extends PanacheEntityBase {
   @GeneratedValue
   public UUID id;
   
+  @JsonBackReference
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "seller_id")
   public User seller;
-
-  @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
-  public List<Bid> bids;
   
   public String name;
 

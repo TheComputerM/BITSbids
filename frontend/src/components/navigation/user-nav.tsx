@@ -3,24 +3,35 @@ import { Avatar } from "~/components/ui/avatar";
 import { Portal } from "solid-js/web";
 import { HStack } from "styled-system/jsx";
 import {
-  TbBuildingStore,
-  TbGavel,
   TbLogout,
   TbMessage,
+  TbSearch,
   TbUser,
 } from "solid-icons/tb";
 import { navigate } from "astro:transitions/client";
 import type { Component } from "solid-js";
 
-const UserProfile: Component<{avatar: string}> = (props) => {
+const UserNav: Component<{avatar: string, initials: string}> = (props) => {
   return (
     <Menu
       positioning={{ placement: "bottom-end", offset: { crossAxis: -24 } }}
-      onSelect={(id) => navigate(`/app/${id.value}`)}
+      onSelect={async (id) => {
+        if (id.value === "logout") {
+          const response = await fetch("/logout", {
+						method: "POST",
+						redirect: "follow"
+					});
+          if (response.ok) {
+            navigate("/");
+          }
+        } else {
+          navigate(`/app/${id.value}`)
+        }
+      }}
     >
       <Menu.Trigger cursor="pointer" ml="1.5">
         <Avatar size="sm">
-          <Avatar.Fallback>PA</Avatar.Fallback>
+          <Avatar.Fallback>{props.initials}</Avatar.Fallback>
           <Avatar.Image src={props.avatar} alt="Avatar" />
         </Avatar>
       </Menu.Trigger>
@@ -39,16 +50,10 @@ const UserProfile: Component<{avatar: string}> = (props) => {
                 Chats
               </HStack>
             </Menu.Item>
-            <Menu.Item id="profile/bids">
+            <Menu.Item id="search">
               <HStack gap="2">
-                <TbGavel />
-                Bids
-              </HStack>
-            </Menu.Item>
-            <Menu.Item id="profile/products">
-              <HStack gap="2">
-                <TbBuildingStore />
-                Products
+                <TbSearch />
+                Search
               </HStack>
             </Menu.Item>
             <Menu.Separator />
@@ -65,4 +70,4 @@ const UserProfile: Component<{avatar: string}> = (props) => {
   );
 }
 
-export default UserProfile;
+export default UserNav;
