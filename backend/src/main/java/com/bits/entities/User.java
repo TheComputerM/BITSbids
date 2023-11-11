@@ -1,6 +1,5 @@
 package com.bits.entities;
 
-import java.util.UUID;
 import java.util.List;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
@@ -17,7 +16,7 @@ import jakarta.persistence.Table;
 public class User extends PanacheEntityBase {
   @Id
   @GeneratedValue
-  public UUID id;
+  public String id;
 
   public String name;
 

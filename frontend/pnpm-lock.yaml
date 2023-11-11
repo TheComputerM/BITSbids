@@ -17,9 +17,21 @@ dependencies:
   '@fontsource-variable/inter':
     specifier: ^5.0.15
     version: 5.0.15
+  '@lucia-auth/adapter-postgresql':
+    specifier: ^2.0.2
+    version: 2.0.2(lucia@2.7.4)(postgres@3.4.3)
+  '@lucia-auth/oauth':
+    specifier: ^3.5.0
+    version: 3.5.0(lucia@2.7.4)
   astro:
     specifier: ^3.4.4
     version: 3.4.4(typescript@5.2.2)
+  lucia:
+    specifier: ^2.7.4
+    version: 2.7.4
+  postgres:
+    specifier: ^3.4.3
+    version: 3.4.3
   solid-icons:
     specifier: ^1.1.0
     version: 1.1.0(solid-js@1.8.5)
@@ -1385,6 +1397,30 @@ packages:
     dependencies:
       '@jridgewell/resolve-uri': 3.1.1
       '@jridgewell/sourcemap-codec': 1.4.15
+
+  /@lucia-auth/adapter-postgresql@2.0.2(lucia@2.7.4)(postgres@3.4.3):
+    resolution: {integrity: sha512-gQ7SlFu+gxQj2IX2J8ZVivcLBbdnf9SbNQOVWkJxZOdY1uaaIQGeNfEDld2Awy02VrXmA4sjHsbkJx1JPVw2+A==}
+    peerDependencies:
+      lucia: ^2.0.0
+      pg: ^8.8.0
+      postgres: ^3.3.0
+    peerDependenciesMeta:
+      pg:
+        optional: true
+      postgres:
+        optional: true
+    dependencies:
+      lucia: 2.7.4
+      postgres: 3.4.3
+    dev: false
+
+  /@lucia-auth/oauth@3.5.0(lucia@2.7.4):
+    resolution: {integrity: sha512-JSwAMVwlDJtbvfcJV1nbkv41OD830pgICrx8zFT71SYd5I1MnEQ+GqMTXBGRyxzc5XlLatT8ZS1Jt0k81487xg==}
+    peerDependencies:
+      lucia: ^2.0.0
+    dependencies:
+      lucia: 2.7.4
+    dev: false
 
   /@nodelib/fs.scandir@2.1.5:
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
@@ -5855,6 +5891,10 @@ packages:
     dependencies:
       yallist: 4.0.0
 
+  /lucia@2.7.4:
+    resolution: {integrity: sha512-do6Aah5kX2DUl7N0CvELWV1/b+qZGF0AUmUrkthYeNfXfgx4RAkWi4BkAlgGDBB/0c1WApb18mUD1pA5qTaWmw==}
+    dev: false
+
   /magic-string@0.27.0:
     resolution: {integrity: sha512-8UnnX2PeRAPZuN12svgR9j7M1uWMovg/CEnIwIG0LFkXSJJe4PdfUGiTGl8V9bsBHFUtfVINcSyYxd7q+kx9fA==}
     engines: {node: '>=12'}
@@ -6704,6 +6744,11 @@ packages:
       nanoid: 3.3.7
       picocolors: 1.0.0
       source-map-js: 1.0.2
+
+  /postgres@3.4.3:
+    resolution: {integrity: sha512-iHJn4+M9vbTdHSdDzNkC0crHq+1CUdFhx+YqCE+SqWxPjm+Zu63jq7yZborOBF64c8pc58O5uMudyL1FQcHacA==}
+    engines: {node: '>=12'}
+    dev: false
 
   /prebuild-install@7.1.1:
     resolution: {integrity: sha512-jAXscXWMcCK8GgCoHOfIr0ODh5ai8mj63L2nWrjuAgXE6tDyYGnx4/8o/rCgU+B4JSyZBKbeZqzhtwtC3ovxjw==}

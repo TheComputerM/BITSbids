@@ -10,8 +10,9 @@ import {
   TbUser,
 } from "solid-icons/tb";
 import { navigate } from "astro:transitions/client";
+import type { Component } from "solid-js";
 
-export default function UserProfile() {
+const UserProfile: Component<{avatar: string}> = (props) => {
   return (
     <Menu
       positioning={{ placement: "bottom-end", offset: { crossAxis: -24 } }}
@@ -20,7 +21,7 @@ export default function UserProfile() {
       <Menu.Trigger cursor="pointer" ml="1.5">
         <Avatar size="sm">
           <Avatar.Fallback>PA</Avatar.Fallback>
-          <Avatar.Image src="https://i.pravatar.cc/300" alt="Avatar" />
+          <Avatar.Image src={props.avatar} alt="Avatar" />
         </Avatar>
       </Menu.Trigger>
       <Portal>
@@ -63,3 +64,5 @@ export default function UserProfile() {
     </Menu>
   );
 }
+
+export default UserProfile;
