@@ -18,6 +18,7 @@
     "@lucia-auth/adapter-postgresql": "^2.0.2",
     "@lucia-auth/oauth": "^3.5.0",
     "astro": "^3.5.2",
+    "cobe": "^0.6.3",
     "lucia": "^2.7.4",
     "postgres": "^3.4.3",
     "solid-icons": "^1.1.0",
