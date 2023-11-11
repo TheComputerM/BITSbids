@@ -10,11 +10,11 @@ import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 
-@Path("/product")
+@Path("/api/product")
 public class ProductResource {
 
   @GET
-  public List<Product> listAll() {
+  public List<Product> getAll() {
     return Product.listAll();
   }
 
