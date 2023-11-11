@@ -1,10 +1,9 @@
 ---
-import { Center, Flex, HStack, Stack } from "styled-system/jsx";
+import { Center, Flex, Stack } from "styled-system/jsx";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { Text } from "~/components/ui/typography";
 import { TbChartLine } from "solid-icons/tb";
 import { SiGoogle } from "solid-icons/si";
-import UserAvatars from "./_/user-avatars";
 import ThemeSwitcher from "~/components/theme-switcher";
 import { Heading } from "~/components/ui/heading";
 import { button } from "styled-system/recipes";
@@ -34,13 +33,6 @@ const session = await Astro.locals.auth.validate();
               buy and sell goods hassle-free and quick.
             </Text>
           </Stack>
-
-          <HStack gap="4">
-            <HStack gap="0">
-              <UserAvatars client:idle />
-            </HStack>
-            <Text fontWeight="medium">Join 10.000+ BITSians</Text>
-          </HStack>
         </Stack>
       </Flex>
       <Flex align="center" h="24">

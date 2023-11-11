@@ -9,11 +9,6 @@ import { getUser } from "~/lib/api/user";
 
 const session = await Astro.locals.auth.validate();
 const user = await getUser(session!.user.userId);
-// The initials of the username
-const initials = user.name
-  .split(" ", 2)
-  .map((x) => x.charAt(0))
-  .join("");
 ---
 
 <Divider position="fixed">
@@ -31,7 +26,7 @@ const initials = user.name
           <SiGithub />
         </a>
         <ThemeSwitcher client:load />
-        <UserNav avatar={user.avatar} initials={initials} client:idle />
+        <UserNav user={user} client:idle />
       </HStack>
     </HStack>
   </Container>

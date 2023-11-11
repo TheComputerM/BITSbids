@@ -1,39 +1,32 @@
 import { Menu } from "~/components/ui/menu";
-import { Avatar } from "~/components/ui/avatar";
+import UserAvatar from "../user-avatar";
 import { Portal } from "solid-js/web";
 import { HStack } from "styled-system/jsx";
-import {
-  TbLogout,
-  TbMessage,
-  TbSearch,
-  TbUser,
-} from "solid-icons/tb";
+import { TbLogout, TbMessage, TbSearch, TbUser } from "solid-icons/tb";
 import { navigate } from "astro:transitions/client";
 import type { Component } from "solid-js";
 
-const UserNav: Component<{avatar: string, initials: string}> = (props) => {
+const UserNav: Component<{ user: User }> = (props) => {
   return (
     <Menu
       positioning={{ placement: "bottom-end", offset: { crossAxis: -24 } }}
-      onSelect={async (id) => {
+      onSelect={(id) => {
         if (id.value === "logout") {
-          const response = await fetch("/logout", {
-						method: "POST",
-						redirect: "follow"
-					});
-          if (response.ok) {
-            navigate("/");
-          }
+          fetch("/logout", {
+            method: "POST",
+            redirect: "follow",
+          }).then((response) => {
+            if (response.ok) {
+              navigate("/");
+            }
+          });
         } else {
-          navigate(`/app/${id.value}`)
+          navigate(`/app/${id.value}`);
         }
       }}
     >
       <Menu.Trigger cursor="pointer" ml="1.5">
-        <Avatar size="sm">
-          <Avatar.Fallback>{props.initials}</Avatar.Fallback>
-          <Avatar.Image src={props.avatar} alt="Avatar" />
-        </Avatar>
+        <UserAvatar user={props.user} />
       </Menu.Trigger>
       <Portal>
         <Menu.Positioner>
@@ -44,16 +37,16 @@ const UserNav: Component<{avatar: string, initials: string}> = (props) => {
                 Profile
               </HStack>
             </Menu.Item>
-            <Menu.Item id="chat">
-              <HStack gap="2">
-                <TbMessage />
-                Chats
-              </HStack>
-            </Menu.Item>
             <Menu.Item id="search">
               <HStack gap="2">
                 <TbSearch />
                 Search
+              </HStack>
+            </Menu.Item>
+            <Menu.Item id="chat">
+              <HStack gap="2">
+                <TbMessage />
+                Chats
               </HStack>
             </Menu.Item>
             <Menu.Separator />
@@ -68,6 +61,6 @@ const UserNav: Component<{avatar: string, initials: string}> = (props) => {
       </Portal>
     </Menu>
   );
-}
+};
 
 export default UserNav;

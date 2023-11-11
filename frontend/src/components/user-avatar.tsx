@@ -5,14 +5,18 @@ const UserAvatar: Component<AvatarProps & { user: User }> = ({
   user,
   ...props
 }) => {
-  const fallback = user.name.split(" ", 2).map(x => x.charAt(0)).join("");
+  // The initials of the name
+  const fallback = user.name
+    .split(" ", 2)
+    .map((x) => x.charAt(0).toUpperCase())
+    .join("");
+
   return (
-    <Avatar {...props}>
+    <Avatar size="sm" {...props}>
       <Avatar.Fallback>{fallback}</Avatar.Fallback>
       <Avatar.Image src={user.avatar} alt={`${fallback} avatar`} />
     </Avatar>
   );
 };
-
 
 export default UserAvatar;
