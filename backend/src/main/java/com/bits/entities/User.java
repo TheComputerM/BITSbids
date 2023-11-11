@@ -27,4 +27,6 @@ public class User extends PanacheEntityBase {
   @OneToMany(mappedBy = "seller", fetch = FetchType.LAZY)
   public List<Product> products;
 
+  @OneToMany(mappedBy = "bidder", fetch = FetchType.LAZY)
+  public List<Bid> bids;
 }
