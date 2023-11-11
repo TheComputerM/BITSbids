@@ -36,7 +36,7 @@ const Globe = () => {
   return (
     <canvas
       ref={canvas}
-      style={{ width: `${size}px`, height: `${size}px` }}
+      style={{ width: `${size}px`, height: `${size}px`, "z-index": "-1" }}
       class={css({ _dark: { filter: "invert()" } })}
     />
   );
