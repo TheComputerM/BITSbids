@@ -28,3 +28,11 @@ INSERT INTO "bid" ("amount", "created_at", "bidder_id", "id", "product_id") VALU
 (38,	'2023-11-17 11:16:43+00',	'cc0828fe-af80-498b-b4a0-cbb1a162debd',	'7fb2c985-ebc2-4bcc-b7ee-07ffcc2ba0e7',	'f55eb21b-5a4d-41f0-a8f5-e8aa6a931d85'),
 (45,	'2023-11-18 17:35:21+00',	'874f37f8-0fe4-4b4f-ab56-af67d61a67ef',	'f17197f3-8c16-4c85-93cd-ccbc2ce28754',	'f55eb21b-5a4d-41f0-a8f5-e8aa6a931d85');
 
+INSERT INTO "message" ("sent_at", "id", "room_id", "attachment", "content") VALUES
+('2023-11-12 23:34:57+00',	'3728149c-a2a3-4043-8a32-84ed22147bad',	'68d7183a-bfa2-4350-90cb-6788051a72d8',	NULL,	'give me your balls'),
+('2023-11-12 23:34:00+00',	'7f700d62-3595-4749-ae79-72c550b144fb',	'68d7183a-bfa2-4350-90cb-6788051a72d8',	NULL,	'kys'),
+('2023-11-12 22:58:30+00',	'1f42bfba-f542-4524-806a-5b00a0520a19',	'f436e0f6-4779-45a1-a6fd-ed5ee34e4d9b',	NULL,	'hi im gay'),
+('2023-11-12 22:59:00+00',	'542f991e-d0cb-4147-8571-ed1bc6e6f447',	'f436e0f6-4779-45a1-a6fd-ed5ee34e4d9b',	NULL,	'hi gay im dad'),
+('2023-11-12 04:25:48+00',	'b962dca3-3e36-4d8f-b7b0-9fc4eb3f431c',	'99b637d2-ec1f-4d46-9514-fb79c2d9762b',	NULL,	'say my name'),
+('2023-11-12 04:27:12+00',	'593173cc-3785-46fe-8069-2a65aeda8e47',	'99b637d2-ec1f-4d46-9514-fb79c2d9762b',	NULL,	'ligma balls');
+
