@@ -1,5 +1,5 @@
 ---
-import { Container, HStack } from "styled-system/jsx";
+import { Container, Divider, Flex, HStack } from "styled-system/jsx";
 import ChatInput from "./_/chat-input";
 import ChatMessage from "./_/chat-message";
 import AppLayout from "~/layouts/AppLayout.astro";
@@ -14,19 +14,25 @@ const user = await getUser(session.user.userId);
 ---
 
 <AppLayout title="Chatroom">
-  <Container bg="bg.subtle">
-    <HStack h="14">
-      <a href="../chat" class={iconButton({ variant: "ghost" })}>
-        <TbChevronLeft />
-      </a>
-      <UserAvatar client:idle user={user} />
-      <Text fontWeight="semibold">{user.name}</Text>
-    </HStack>
-  </Container>
+  <Divider bg="bg.subtle">
+    <Container>
+      <HStack h="14">
+        <a href="/app/chat" class={iconButton({ variant: "ghost" })}>
+          <TbChevronLeft />
+        </a>
+        <UserAvatar client:idle user={user} />
+        <Text fontWeight="semibold">{user.name}</Text>
+      </HStack>
+    </Container>
+  </Divider>
 
-  <Container display="flex" flexDirection="column" py="4" gap="6">
-    <ChatMessage message="Hi" fromUser={true} />
-    <ChatMessage message="Hello There" />
-    <ChatInput />
+  <Container>
+    <Flex direction="column" gap="10" h="calc(100vh - 7.5rem)">
+      <Flex gap="6" direction="column" mt="4" flexGrow={1}>
+        <ChatMessage message="Hi" fromUser={true} />
+        <ChatMessage message="Hello There" />
+      </Flex>
+      <ChatInput />
+    </Flex>
   </Container>
 </AppLayout>
