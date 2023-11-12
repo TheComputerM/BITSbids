@@ -1,9 +1,45 @@
 ---
-import { Container, Flex, Divider } from "styled-system/jsx";
+import { TbPlus } from "solid-icons/tb";
+import { Container, Flex, Divider, Stack } from "styled-system/jsx";
+import { Button } from "~/components/ui/button";
 import { Heading } from "~/components/ui/heading";
+import { Input } from "~/components/ui/input";
+import { Label } from "~/components/ui/label";
+import { Textarea } from "~/components/ui/textarea";
 import AppLayout from "~/layouts/AppLayout.astro";
----
 
+if (Astro.request.method === "POST") {
+  try {
+    const session = await Astro.locals.auth.validate();
+    const data = await Astro.request.formData();
+    const product = {
+      name: data.get("name"),
+      description: data.get("description"),
+      basePrice: parseInt(data.get("basePrice") as string),
+      autoSellPrice: null,
+      sold: false,
+      attachments: [],
+      endingAt: (Date.now() / 1000) + 60 * 60,
+      seller: {
+        id: session!.user.userId
+      }
+    };
+    const response = await fetch("http://127.0.0.1:8080/api/product", {
+      method: "POST",
+      body: JSON.stringify(product),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+    // console.log(await response.text())
+    if (response.ok) {
+      Astro.redirect("/app")
+    }
+  } catch (error) {
+    console.error(error);
+  }
+}
+---
 
 <AppLayout title="Create Product">
   <Container>
@@ -14,6 +50,55 @@ import AppLayout from "~/layouts/AppLayout.astro";
     </Flex>
   </Container>
   <Divider />
-  <br />
-  
+  <Container py="8" bg="bg.default">
+    <form method="post">
+      <Flex gap="3" wrap="wrap-reverse">
+        <Stack gap="3">
+          <Stack gap="1.5">
+            <Label for="name">Name</Label>
+            <Input id="name" name="name" placeholder="Product Name" required />
+          </Stack>
+          <Stack gap="1.5">
+            <Label for="description">Description</Label>
+            <Textarea
+              rows={4}
+              id="description"
+              name="description"
+              placeholder="Product Description..."
+              required
+            />
+          </Stack>
+          <Flex gap="3" wrap="wrap">
+            <Stack gap="1.5" flexGrow={1}>
+              <Label for="basePrice">Base Price</Label>
+              <Input
+                id="basePrice"
+                name="basePrice"
+                type="number"
+                min={0}
+                value={0}
+                required
+              />
+            </Stack>
+            <Stack gap="1.5" flexGrow={1}>
+              <Label for="autoSellPrice">Auto Sell Price</Label>
+              <Input
+                id="autoSellPrice"
+                name="autoSellPrice"
+                type="number"
+                min={0}
+              />
+            </Stack>
+          </Flex>
+          <Button type="submit">
+            <TbPlus />
+            Create Product
+          </Button>
+        </Stack>
+        <div style="flex-grow: 1;">
+          TODO: Upload Images
+        </div>
+      </Flex>
+    </form>
+  </Container>
 </AppLayout>
