@@ -3,19 +3,7 @@ import { OAuthRequestError } from "@lucia-auth/oauth";
 
 import type { APIRoute } from "astro";
 
-const DEV_ID: string | null = "874f37f8-0fe4-4b4f-ab56-af67d61a67ef";
-
 export const GET: APIRoute = async (context) => {
-
-	if (DEV_ID) {
-		const session = await auth.createSession({
-			userId: DEV_ID,
-			attributes: {}
-		});
-		context.locals.auth.setSession(session);
-		return context.redirect("/app", 302);
-	}
-
 	const storedState = context.cookies.get("google_oauth_state")!.value;
 	const state = context.url.searchParams.get("state");
 	const code = context.url.searchParams.get("code");
