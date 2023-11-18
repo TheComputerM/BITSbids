@@ -17,8 +17,9 @@
     "@fontsource-variable/inter": "^5.0.15",
     "@lucia-auth/adapter-postgresql": "^2.0.2",
     "@lucia-auth/oauth": "^3.5.0",
-    "astro": "^3.5.2",
+    "astro": "^3.5.5",
     "cobe": "^0.6.3",
+    "date-fns": "^2.30.0",
     "lucia": "^2.7.4",
     "postgres": "^3.4.3",
     "solid-icons": "^1.1.0",
@@ -26,8 +27,8 @@
     "typescript": "^5.2.2"
   },
   "devDependencies": {
-    "@pandacss/astro": "^0.18.2",
-    "@pandacss/dev": "^0.18.2",
-    "@park-ui/panda-preset": "^0.22.0"
+    "@pandacss/astro": "^0.18.3",
+    "@pandacss/dev": "^0.18.3",
+    "@park-ui/panda-preset": "^0.23.0"
   }
 }

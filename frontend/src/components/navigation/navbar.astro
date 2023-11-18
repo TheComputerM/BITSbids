@@ -11,7 +11,7 @@ const session = await Astro.locals.auth.validate();
 const user = await getUser(session!.user.userId);
 ---
 
-<Divider position="fixed" bg="bg.canvas">
+<Divider position="fixed" bg="bg.canvas" zIndex="docked">
   <Container>
     <HStack h="14" justify="space-between">
       <a href="/app">
