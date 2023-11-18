@@ -1,33 +1,30 @@
 package com.bits;
 
-import java.util.List;
-
 import com.bits.entities.User;
 
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.PATCH;
 import jakarta.ws.rs.Path;
-import jakarta.ws.rs.WebApplicationException;
+import jakarta.ws.rs.core.Response;
 
 @Path("/api/user")
 public class UserResource {
 
   @GET
-  public List<User> getAll() {
-    return User.listAll();
+  public Response getAll() {
+    return Response.ok(User.listAll()).build();
   }
 
   @GET
   @Path("/{id}")
-  public User get(String id) {
+  public Response get(String id) {
     User user = User.findById(id);
     if (user == null) {
-      throw new WebApplicationException(404);
+      return Response.status(400, "User not found").build();
     }
-    return user;
+    return Response.ok(user).build();
   }
-
 
   @PATCH
   @Transactional
