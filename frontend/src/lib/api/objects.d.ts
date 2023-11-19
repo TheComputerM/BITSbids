@@ -17,3 +17,11 @@ interface Product {
   createdAt: string;
   seller: User;
 }
+
+interface Bid {
+  id: string;
+  product: Product;
+  bidder: User;
+  amount: number;
+  createdAt: string;
+}
