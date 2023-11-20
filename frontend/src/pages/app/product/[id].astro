@@ -1,0 +1,67 @@
+---
+import { SiFacebook, SiTwitter, SiWhatsapp } from "solid-icons/si";
+import { Box, Container, Divider, HStack, Stack } from "styled-system/jsx";
+import { Heading } from "~/components/ui/heading";
+import { Text } from "~/components/ui/typography";
+import AppLayout from "~/layouts/AppLayout.astro";
+import { getProduct, getProductBids } from "~/lib/api/product";
+import ImageGallery from "./_/image-gallery";
+import BidCard from "./_/bid-card";
+import { Button } from "~/components/ui/button";
+import { Badge } from "~/components/ui/badge";
+import { TbCoins, TbGavel } from "solid-icons/tb";
+
+const { id } = Astro.params;
+const [product, bids] = await Promise.all([
+  getProduct(id!),
+  getProductBids(id!),
+]);
+---
+
+<AppLayout title="Product">
+  <Container py="8">
+    <Stack
+      direction={{ base: "column", md: "row" }}
+      gap={{ base: "10", lg: "18" }}
+    >
+      <Box flex="2">
+        <ImageGallery client:idle images={product.attachments} />
+      </Box>
+      <Stack flex="1" gap="6">
+        <Stack gap="2" align="start">
+          {product.sold && <Badge size="lg">Sold</Badge>}
+          <Heading as="h1" textStyle="3xl" fontWeight="semibold">
+            {product.name}
+          </Heading>
+        </Stack>
+        <Text color="fg.muted">{product.description}</Text>
+        <Stack>
+          <Text textStyle="sm" color="fg.emphasized" fontWeight="medium">
+            Share
+          </Text>
+          <HStack gap="3" fontSize="1.5rem" color="fg.subtle">
+            <SiFacebook />
+            <SiTwitter />
+            <SiWhatsapp />
+          </HStack>
+        </Stack>
+        <Divider />
+        <Button size="xl">
+          Buy Instantly:
+          <TbCoins />
+          {product.autoSellPrice}
+        </Button>
+        <Button size="xl">
+          Place a Bid
+          <TbGavel />
+        </Button>
+      </Stack>
+    </Stack>
+    <br />
+    <Divider />
+    <br />
+    <Stack>
+      {bids.map((bid) => <BidCard bid={bid} client:idle />)}
+    </Stack>
+  </Container>
+</AppLayout>

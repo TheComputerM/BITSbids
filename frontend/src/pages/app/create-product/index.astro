@@ -24,6 +24,7 @@ if (Astro.request.method === "POST") {
         id: session!.user.userId
       }
     };
+
     const response = await fetch("http://127.0.0.1:8080/api/product", {
       method: "POST",
       body: JSON.stringify(product),
@@ -31,9 +32,10 @@ if (Astro.request.method === "POST") {
         'Content-Type': 'application/json'
       }
     });
-    // console.log(await response.text())
+    
+    const productId = await response.text();
     if (response.ok) {
-      Astro.redirect("/app")
+      Astro.redirect(`/app/product/${productId}`)
     }
   } catch (error) {
     console.error(error);
