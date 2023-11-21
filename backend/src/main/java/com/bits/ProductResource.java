@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import com.bits.entities.Bid;
 import com.bits.entities.Product;
+import com.bits.projections.BidProductView;
 
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.GET;
@@ -33,10 +34,11 @@ public class ProductResource {
   @Path("/{id}/bids")
   @GET
   public Response getProductBids(UUID id) {
-    List<Bid> bids = Bid.find("select b from Bid b where b.product.id = ?1 order by b.createdAt DESC", id).list();
+    List<BidProductView> bids = Bid.find("from Bid where product.id = ?1 order by createdAt DESC", id)
+        .project(BidProductView.class).list();
     return Response.ok(bids).build();
   }
-
+  
   @POST
   @Transactional
   public UUID create(Product product) {

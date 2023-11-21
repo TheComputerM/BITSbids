@@ -11,7 +11,7 @@ interface Product {
   description: string;
   attachments: string[];
   basePrice: number;
-  autoSellPrice: number | null;
+  autoSellPrice?: number;
   sold: boolean;
   endingAt: string;
   createdAt: string;
