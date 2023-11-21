@@ -4,7 +4,7 @@ import { css } from "styled-system/css";
 import { button } from "styled-system/recipes";
 import { Flex, HStack, Stack } from "styled-system/jsx";
 import { Text } from "./ui/typography";
-import { TbChevronRight } from "solid-icons/tb";
+import { TbCalendarTime, TbCashOff, TbChevronRight } from "solid-icons/tb";
 import UserAvatar from "./user-avatar";
 import {
   formatDistanceToNowStrict,
@@ -25,7 +25,7 @@ const DeadlineCountdown: Component<{ endingAt: string }> = ({ endingAt }) => {
     <Tooltip
       open={false}
       openDelay={250}
-      onOpenChange={({ open }) => {
+      onOpenChange={({ open }: { open: boolean }) => {
         if (open) {
           setCountdown(formatDuration(getDuration()));
         }
@@ -33,6 +33,7 @@ const DeadlineCountdown: Component<{ endingAt: string }> = ({ endingAt }) => {
     >
       <Tooltip.Trigger display="flex" alignItems="center" gap="1">
         {formatDistanceToNowStrict(deadline, {roundingMethod: "floor"})}
+        <TbCalendarTime style={{"margin-left": "2px"}} />
       </Tooltip.Trigger>
       <Portal>
         <Tooltip.Positioner>
@@ -50,11 +51,11 @@ const InfoCard: ParentComponent<{ title: string }> = (props) => {
   return (
     <Stack
       flexGrow={1}
-      borderRadius="l1"
       bgColor="bg.emphasized"
+      borderRadius="l1"
+      justify="space-between"
       px="4"
       py="2"
-      gap="2"
     >
       {props.title}:
       <Text fontWeight="bold" fontSize="2xl">
@@ -93,7 +94,7 @@ const ProductCard: Component<{ product: Product }> = ({ product }) => {
             <InfoCard title="Ends In">
               <DeadlineCountdown endingAt={product.endingAt} />
             </InfoCard>
-            <InfoCard title="Buy Instantly">{product.autoSellPrice!}</InfoCard>
+            <InfoCard title="Buy Instantly">{product.autoSellPrice ?? <TbCashOff size={32} />}</InfoCard>
             <InfoCard title="Base Price">{product.basePrice}</InfoCard>
           </Flex>
         </Card.Body>

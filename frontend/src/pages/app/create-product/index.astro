@@ -1,4 +1,5 @@
 ---
+import { addDays, format } from "date-fns";
 import { TbPlus } from "solid-icons/tb";
 import { Container, Flex, Divider, Stack } from "styled-system/jsx";
 import { Button } from "~/components/ui/button";
@@ -16,26 +17,26 @@ if (Astro.request.method === "POST") {
       name: data.get("name"),
       description: data.get("description"),
       basePrice: parseInt(data.get("basePrice") as string),
-      autoSellPrice: null,
+      autoSellPrice: data.get("autoSellPrice"),
       sold: false,
       attachments: [],
-      endingAt: (Date.now() / 1000) + 60 * 60,
+      endingAt: new Date(data.get("deadline") as string).getTime() / 1000,
       seller: {
-        id: session!.user.userId
-      }
+        id: session!.user.userId,
+      },
     };
 
     const response = await fetch("http://127.0.0.1:8080/api/product", {
       method: "POST",
       body: JSON.stringify(product),
       headers: {
-        'Content-Type': 'application/json'
-      }
+        "Content-Type": "application/json",
+      },
     });
-    
+
     const productId = await response.text();
     if (response.ok) {
-      Astro.redirect(`/app/product/${productId}`)
+      Astro.redirect(`/app/product/${productId}`);
     }
   } catch (error) {
     console.error(error);
@@ -54,53 +55,59 @@ if (Astro.request.method === "POST") {
   <Divider />
   <Container py="8" bg="bg.default">
     <form method="post">
-      <Flex gap="3" wrap="wrap-reverse">
-        <Stack gap="3">
-          <Stack gap="1.5">
-            <Label for="name">Name</Label>
-            <Input id="name" name="name" placeholder="Product Name" required />
-          </Stack>
-          <Stack gap="1.5">
-            <Label for="description">Description</Label>
-            <Textarea
-              rows={4}
-              id="description"
-              name="description"
-              placeholder="Product Description..."
+      <Stack gap="3">
+        <Stack gap="1.5">
+          <Label for="name">Name</Label>
+          <Input id="name" name="name" placeholder="Product Name" required />
+        </Stack>
+        <Stack gap="1.5">
+          <Label for="description">Description</Label>
+          <Textarea
+            rows={4}
+            id="description"
+            name="description"
+            placeholder="Product Description..."
+            required
+          />
+        </Stack>
+        <Stack gap="1.5">
+          <Label for="deadline">Deadline</Label>
+          <Input
+            id="deadline"
+            name="deadline"
+            type="datetime-local"
+            min={format(addDays(Date.now(), 1), "yyyy-MM-dd'T'HH:mm")}
+            required
+          />
+        </Stack>
+        <Flex gap="3" wrap="wrap">
+          <Stack gap="1.5" flexGrow={1}>
+            <Label for="basePrice">Base Price</Label>
+            <Input
+              id="basePrice"
+              name="basePrice"
+              type="number"
+              min={0}
+              value={0}
               required
             />
           </Stack>
-          <Flex gap="3" wrap="wrap">
-            <Stack gap="1.5" flexGrow={1}>
-              <Label for="basePrice">Base Price</Label>
-              <Input
-                id="basePrice"
-                name="basePrice"
-                type="number"
-                min={0}
-                value={0}
-                required
-              />
-            </Stack>
-            <Stack gap="1.5" flexGrow={1}>
-              <Label for="autoSellPrice">Auto Sell Price</Label>
-              <Input
-                id="autoSellPrice"
-                name="autoSellPrice"
-                type="number"
-                min={0}
-              />
-            </Stack>
-          </Flex>
-          <Button type="submit">
-            <TbPlus />
-            Create Product
-          </Button>
-        </Stack>
-        <div style="flex-grow: 1;">
-          TODO: Upload Images
-        </div>
-      </Flex>
+          <Stack gap="1.5" flexGrow={1}>
+            <Label for="autoSellPrice">Auto Sell Price</Label>
+            <Input
+              id="autoSellPrice"
+              name="autoSellPrice"
+              type="number"
+              min={0}
+              placeholder="Leave empty to not auto sell at a particular price."
+            />
+          </Stack>
+        </Flex>
+        <Button type="submit">
+          <TbPlus />
+          Create Product
+        </Button>
+      </Stack>
     </form>
   </Container>
 </AppLayout>
