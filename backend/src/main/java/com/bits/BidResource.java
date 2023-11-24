@@ -39,28 +39,27 @@ public class BidResource {
     User bidder = User.findById(bid.bidder.id);
     Product product = Product.findById(bid.product.id);
     if (bidder == null || product == null) {
-        return Response.status(400, "Cannot find product or bidder").build ();
+        return Response.status(400, "Cannot find product or bidder").build();
     }
     Instant now = Instant.now ();
     if (now.compareTo (product.endingAt) > 0 || product.sold) {
-        return Response.status(400, "Product has been sold").build ();
+        return Response.status(400, "Product has been sold").build();
     }
     if (bid.bidder.id == product.seller.id) {
-        return Response.status(400, "Seller cannot bid on their own product").build ();
+        return Response.status(400, "Seller cannot bid on their own product").build();
     }
     if (bid.amount > bidder.balance) {
-        return Response.status(400, "User does not have the required balance to make the bid").build ();
+        return Response.status(400, "User does not have the required balance to make the bid").build();
     }
-    List<BidProductView> previousBids = Bid.find("from Bid where product.id = ?1 order by amount DESC", product.id)
-        .project(BidProductView.class).list();
+    List<Bid> previousBids = Bid.find("from Bid where product.id = ?1 order by amount DESC limit 1", product.id).list();
     if (previousBids.size () == 0) {
         if (bid.amount < product.basePrice) {
-            return Response.status(400, "Bid amount cannot be less than the base price").build ();
+            return Response.status(400, "Bid amount cannot be less than the base price").build();
         }
     } else {
-        BidProductView winningBid = previousBids.get(0);
+        Bid winningBid = previousBids.get(0);
         if (bid.amount <= winningBid.amount) {
-            return Response.status(400, "Bid amount is not enough to beat the current winning bid").build ();
+            return Response.status(400, "Bid amount is not enough to beat the current winning bid").build();
         }
         User previousWinner = User.findById(winningBid.bidder.id);
         previousWinner.balance += winningBid.amount;
@@ -70,6 +69,6 @@ public class BidResource {
     }
     bidder.balance -= bid.amount;
     bid.persist();
-    return Response.ok(bid.id).build ();
+    return Response.ok(bid.id).build();
   }
 }
