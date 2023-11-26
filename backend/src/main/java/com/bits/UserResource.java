@@ -31,8 +31,10 @@ public class UserResource {
   @Path("/{id}")
   public User update(String id, User updatedUser) {
     User user = User.findById(id);
-    user.id = id;
-    user = updatedUser;
+    user.name=updatedUser.name;
+    user.balance=updatedUser.balance;
+    user.persist();
+
     return user;
   }
 }

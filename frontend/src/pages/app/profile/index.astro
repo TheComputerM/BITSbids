@@ -1,16 +1,56 @@
 ---
-import { Container, Divider, Flex } from "styled-system/jsx";
+import { Container, Divider, Flex, Stack } from "styled-system/jsx";
 import AppLayout from "~/layouts/AppLayout.astro";
 import { Heading } from "~/components/ui/heading";
 import { getUser } from "~/lib/api/user";
+import { Label } from "~/components/ui/label";
+import { Button } from "~/components/ui/button";
+import { Input } from "~/components/ui/input";
+import { Card } from "~/components/ui/card";
+import { Avatar , type AvatarProps } from "@ark-ui/solid";
+import { HStack }  from "styled-system/jsx";
+import { TbBuildingStore, TbGavel, TbPlus } from "solid-icons/tb";
+import { button } from "styled-system/recipes";
+import UserAvatar from "~/components/user-avatar";
+
 
 const session = (await Astro.locals.auth.validate())!;
 const user = await getUser(session.user.userId);
+
+if (Astro.request.method === "POST") {
+  try {
+    const session = await Astro.locals.auth.validate();
+    const data = await Astro.request.formData();
+    const user1 = {
+      id : user.id,
+      name : data.get("name"),
+      balance : parseInt( data.get("balance") as string),
+      avatar: user.avatar,
+      
+    };
+   
+    const response = await fetch(`http://127.0.0.1:8080/api/user/${user.id}/`, {
+      method: "PATCH",
+      body:JSON.stringify(user1),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+    console.log(await response.text())
+    if (response.ok) {
+      Astro.redirect("/app/profile")
+      
+    }
+    console.log('success')
+  } catch (error) {
+    console.error(error);
+  }
+}
 ---
 
 <AppLayout title="Profile">
   <Container>
-    <Flex h="18rem" align="center">
+    <Flex h="10rem" align="center">
       <div>
         <Heading textStyle="6xl">Profile Settings</Heading>
       </div>
@@ -19,6 +59,85 @@ const user = await getUser(session.user.userId);
   <Divider />
   <br />
   <Container>
+  <form method = "post">  
+    <Flex direction={{ base: "column", md: "row" }}>
+      <Flex direction="column"
+      px={{ base: "1", md: "1" }}>
+        <Stack h="6rem" gap = "1.5" width = "2xl">
+          <Label for="name">Display Name</Label>
+          <Input id="name" name="name" width = "2xs" value={user.name}  />
+        </Stack>
+      </Flex>
+      <Flex align = "left " width= "4xl" h = "6rem">
+        <Stack h="6rem">
+          <Label for="av">Avatar</Label>
+          <UserAvatar id = "av" user={user} h="5rem" width = "5rem"></UserAvatar>
+        </Stack>
+        
+       </Flex>
+
+    </Flex>
+    
+    <Stack h="6rem" gap = "1.5" width = "2xs" px={{md:"1"}}>
+      <Label for="balance">Balance</Label>
+      <Input id="balance" name="balance" type="number" width = "2xs" value={user.balance} />
+    </Stack>
+    
+    <Button type="submit" size="xs" >Save</Button>
+    
+    </Container>
+    <br />
+    <HStack justify = center>
+    <Card.Root h="10rem" , size="xs"
+    px={{ base: "1", md: "1" }}>
+      <Card.Header>
+        <Card.Title align = center >Number of Bids Placed</Card.Title>
+        
+        
+      </Card.Header>
+      <Card.Body>
+        <br />
+        
+
+        <h1 align = center>34</h1>
+        <br />
+        <Flex justify="center">
+        <a href="/app" align = center class={button({ variant: "outline" ,align : "center",justify : "center"})}>
+          <TbGavel />
+          Place More
+        </a>
+      </Flex>
+      </Card.Body>
+    </Card.Root>
+    <Card.Root h="10rem" , size="xs"
+    px={{ base: "1", md: "1" }}>
+      <Card.Header>
+        <Card.Title align = center >Number of Messages Sent</Card.Title>
+        
+        
+
+      </Card.Header>
+      <Card.Body>
+        <br />
+        
+        <h1 align = center>56</h1>
+        <br />
+        <Flex justify="center">
+          <a href="/app/chat" class={button({ variant: "outline"})}>
+            <TbPlus />
+            Check your messages
+          </a>
+        </Flex>
+
+      </Card.Body>
+    </Card.Root>
+  </HStack>
+  <br />
+    <Divider />
+    <br />
+  </form>
+    <Container>
+    
     <p>ID: {user.id}</p>
     <p>Name: {user.name}</p>
     <p>Avatar: {user.avatar}</p>
