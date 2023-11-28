@@ -56,4 +56,10 @@ const products = await getAllProducts();
       {(products).map((p) => <ProductCard client:idle product={p} />)}
     </Stack>
   </Container>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    if (params.has('session')) {
+      localStorage.setItem("session", params.get('session')!);
+    }
+  </script>
 </AppLayout>

@@ -45,7 +45,7 @@ const session = await Astro.locals.auth.validate();
     <Center flex="1" py="24" px="8">
       <Stack textAlign="center" gap="4">
         <Heading as="h2" textStyle="3xl">Log in to your account</Heading>
-        <Text color="fg.muted">Use your BITS Account</Text>
+        <Text color="fg.muted">Use your <b>BITS</b> Google account</Text>
         {
           session ? (
             <a href="/app" class={button({ size: "xl" })}>
@@ -59,9 +59,11 @@ const session = await Astro.locals.auth.validate();
           )
         }
         <Text as="p" color="fg.muted" fontSize="sm">
-          By signing in, you agree to our <Link href="/terms">Terms and Conditions</Link>.
+          By signing in, you agree to our
+          <Link href="/terms">Terms and Conditions</Link>.
         </Text>
       </Stack>
     </Center>
   </Flex>
+  {!session && <script>localStorage.removeItem("session");</script>}
 </BaseLayout>
