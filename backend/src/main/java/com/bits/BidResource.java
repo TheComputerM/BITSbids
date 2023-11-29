@@ -7,7 +7,6 @@ import java.util.UUID;
 import com.bits.entities.Bid;
 import com.bits.entities.User;
 import com.bits.entities.Product;
-import com.bits.projections.BidProductView;
 
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.GET;
