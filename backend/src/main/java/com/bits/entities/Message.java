@@ -23,6 +23,10 @@ public class Message extends PanacheEntityBase {
 
   @ManyToOne
   @OnDelete(action = OnDeleteAction.CASCADE)
+  public User sender;
+
+  @ManyToOne
+  @OnDelete(action = OnDeleteAction.CASCADE)
   public Chatroom room;
 
   @Column(columnDefinition = "TEXT")

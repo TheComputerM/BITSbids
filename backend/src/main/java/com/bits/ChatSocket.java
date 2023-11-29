@@ -12,22 +12,24 @@ import jakarta.websocket.server.PathParam;
 import jakarta.websocket.Session;
 import jakarta.websocket.server.ServerEndpoint;
 
-@ServerEndpoint("/chatroom/{chatroom}/{user}")
+@ServerEndpoint("/ws/chatroom/{chatroom}/{userSession}")
 @ApplicationScoped
 public class ChatSocket {
   Map<String, Map<String, Session>> sessions = new ConcurrentHashMap<>();
 
   @OnOpen
-  public void onOpen(Session session, @PathParam("chatroom") String chatroom, @PathParam("user") String userId) {
+  public void onOpen(Session session, @PathParam("chatroom") String chatroom,
+      @PathParam("userSession") String userSession) {
     if (!sessions.containsKey(chatroom)) {
       sessions.put(chatroom, new ConcurrentHashMap<>());
     }
-    sessions.get(chatroom).put(userId, session);
+    sessions.get(chatroom).put(userSession, session);
   }
 
   @OnClose
-  public void onClose(Session session, @PathParam("chatroom") String chatroom, @PathParam("user") String userId) {
-    sessions.get(chatroom).remove(userId, session);
+  public void onClose(Session session, @PathParam("chatroom") String chatroom,
+      @PathParam("userSession") String userSession) {
+    sessions.get(chatroom).remove(userSession, session);
     if (sessions.get(chatroom).isEmpty()) {
       sessions.remove(chatroom);
     }
@@ -39,12 +41,12 @@ public class ChatSocket {
   }
 
   @OnMessage
-  public void onMessage(String message, @PathParam("chatroom") String chatroom, @PathParam("user") String userId) {
-    broadcast(chatroom, userId + ": " + message);
-    // broadcast(">> " + chatroom + ": " + message);
+  public void onMessage(String content, @PathParam("chatroom") String chatroom,
+      @PathParam("userSession") String userSession) {
+    broadcast(chatroom, content);
   }
 
-  private void broadcast(String chatroom, String message) {
+  private void broadcast(String chatroom, Object message) {
     Map<String, Session> chatroomSessions = sessions.get(chatroom);
     chatroomSessions.values().forEach(s -> s.getAsyncRemote().sendObject(message, result -> {
       if (result.getException() != null) {
@@ -52,15 +54,4 @@ public class ChatSocket {
       }
     }));
   }
-
-  // private void broadcast(String message) {
-  // sessions.values().forEach(s -> {
-  // s.getAsyncRemote().sendObject(message, result -> {
-  // if (result.getException() != null) {
-  // System.out.println("Unable to send message: " + result.getException());
-  // }
-  // });
-  // });
-  // }
-
 }

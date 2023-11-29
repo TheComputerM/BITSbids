@@ -26,6 +26,9 @@ dependencies:
   '@lucia-auth/oauth':
     specifier: ^3.5.0
     version: 3.5.0(lucia@2.7.4)
+  '@solid-primitives/websocket':
+    specifier: ^1.2.0
+    version: 1.2.0(solid-js@1.8.6)
   astro:
     specifier: ^3.6.0
     version: 3.6.0(typescript@5.3.2)
@@ -1858,6 +1861,14 @@ packages:
       picocolors: 1.0.0
       tslib: 2.6.2
     dev: true
+
+  /@solid-primitives/websocket@1.2.0(solid-js@1.8.6):
+    resolution: {integrity: sha512-Ft74wlLD/zrOSDUq4zMDDEs4Bf7ywQO52zOMQqijLYZ9ndvepje5Eb1xiFGnfZ2kcbKaLUfnqIQxVZVB7FGnPQ==}
+    peerDependencies:
+      solid-js: ^1.6.12
+    dependencies:
+      solid-js: 1.8.6
+    dev: false
 
   /@swc/helpers@0.5.3:
     resolution: {integrity: sha512-FaruWX6KdudYloq1AHD/4nU+UsMTdNE8CKyrseXWEcgjDAbvkwJg2QGPAnfIJLIWsjZOSPLOAykK6fuYp4vp4A==}

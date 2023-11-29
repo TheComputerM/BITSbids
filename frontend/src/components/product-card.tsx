@@ -32,8 +32,8 @@ const DeadlineCountdown: Component<{ endingAt: string }> = ({ endingAt }) => {
       }}
     >
       <Tooltip.Trigger display="flex" alignItems="center" gap="1">
-        {formatDistanceToNowStrict(deadline, {roundingMethod: "floor"})}
-        <TbCalendarTime style={{"margin-left": "2px"}} />
+        {formatDistanceToNowStrict(deadline, { roundingMethod: "floor" })}
+        <TbCalendarTime style={{ "margin-left": "2px" }} />
       </Tooltip.Trigger>
       <Portal>
         <Tooltip.Positioner>
@@ -55,9 +55,12 @@ const InfoCard: ParentComponent<{ title: string }> = (props) => {
       borderRadius="l1"
       justify="space-between"
       px="4"
-      py="2"
+      py="3"
+      gap="0.5"
     >
-      {props.title}:
+      <Text textStyle="sm" color="fg.emphasized" fontWeight="medium">
+        {props.title}:
+      </Text>
       <Text fontWeight="bold" fontSize="2xl">
         {props.children}
       </Text>
@@ -94,15 +97,13 @@ const ProductCard: Component<{ product: Product }> = ({ product }) => {
             <InfoCard title="Ends In">
               <DeadlineCountdown endingAt={product.endingAt} />
             </InfoCard>
-            <InfoCard title="Buy Instantly">{product.autoSellPrice ?? <TbCashOff size={32} />}</InfoCard>
+            <InfoCard title="Buy Instantly">
+              {product.autoSellPrice ?? <TbCashOff size={32} />}
+            </InfoCard>
             <InfoCard title="Base Price">{product.basePrice}</InfoCard>
           </Flex>
         </Card.Body>
-        <Card.Footer justifyContent="space-between" flexWrap="wrap">
-          <HStack>
-            <UserAvatar user={product.seller} />
-            <Text>{product.seller.name}</Text>
-          </HStack>
+        <Card.Footer>
           <a href={`/app/product/${product.id}`} class={button({ size: "sm" })}>
             Visit
             <TbChevronRight />
