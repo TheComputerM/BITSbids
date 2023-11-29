@@ -1,14 +1,25 @@
 ---
 import AppLayout from "~/layouts/AppLayout.astro";
+import { Heading } from "~/components/ui/heading";
 import { Chatrooms } from "./_/rooms";
-import { Container, Stack } from "styled-system/jsx";
+import { Container, Divider, Stack } from "styled-system/jsx";
 ---
 
 <AppLayout title="Chats">
   <br />
   <Container>
+    <Heading textStyle="4xl">Products you have listed</Heading>
+    <br />
     <Stack>
-      <Chatrooms client:load />
+      <Chatrooms type="in" client:load />
+    </Stack>
+    <br />
+    <Divider />
+    <br />
+    <Heading textStyle="4xl">Products you are interested in</Heading>
+    <br />
+    <Stack>
+      <Chatrooms type="out" client:load />
     </Stack>
   </Container>
 </AppLayout>

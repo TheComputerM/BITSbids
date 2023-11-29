@@ -22,3 +22,5 @@ INSERT INTO "bid" ("amount", "created_at", "bidder_id", "id", "product_id") VALU
 (38,	'2023-11-17 11:16:43+00',	'cc0828fe-af80-498b-b4a0-cbb1a162debd',	'7fb2c985-ebc2-4bcc-b7ee-07ffcc2ba0e7',	'f55eb21b-5a4d-41f0-a8f5-e8aa6a931d85'),
 (45,	'2023-11-18 17:35:21+00',	'874f37f8-0fe4-4b4f-ab56-af67d61a67ef',	'f17197f3-8c16-4c85-93cd-ccbc2ce28754',	'f55eb21b-5a4d-41f0-a8f5-e8aa6a931d85');
 
+INSERT INTO "chatroom" ("buyer_last_read", "seller_last_read", "id", "product_id", "buyer_id") VALUES
+('2023-11-29 18:03:48.600479+00',	'2023-11-29 18:03:48.600479+00',	'88a06cbf-ec83-4ca8-9de8-c1ec195d1d10',	'e80dc27a-e06a-4ac0-b7c0-d26df81190b3',	'874f37f8-0fe4-4b4f-ab56-af67d61a67ef');
