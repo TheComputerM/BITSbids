@@ -1,5 +1,5 @@
-export async function getChatrooms(session: string) {
-  const response = await fetch("http://127.0.0.1:8080/api/chatroom", {
+export async function getChatrooms(session: string, type: string) {
+  const response = await fetch("http://127.0.0.1:8080/api/chatroom/" + type, {
     headers: {
       Authorization: `Bearer ${session}`,
     },

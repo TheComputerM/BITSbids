@@ -20,10 +20,20 @@ public class ChatroomResource {
   String bearerToken;
 
   @GET
-  public Response getAllChatrooms() {
+  @Path("/in")
+  public Response getInChatrooms() {
+    User user = User.findByBearer(bearerToken);
+    List<Chatroom> chatrooms = Chatroom.find("product.seller", user).list();
+
+    return Response.ok(chatrooms).build();
+  }
+
+  @GET
+  @Path("/out")
+  public Response getOutChatrooms() {
     User user = User.findByBearer(bearerToken);
     List<Chatroom> chatrooms = Chatroom.find("buyer", user).list();
-    
+
     return Response.ok(chatrooms).build();
   }
 
