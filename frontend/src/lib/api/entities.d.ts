@@ -25,3 +25,9 @@ interface Bid {
   amount: number;
   createdAt: string;
 }
+
+interface Chatroom {
+  id: string;
+  product: Product;
+  buyer: User;
+}

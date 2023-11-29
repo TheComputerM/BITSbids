@@ -30,11 +30,21 @@ const ImageGallery: Component<{ images: string[] }> = (props) => {
   return (
     <Stack gap="4" direction={{ base: "column-reverse", lg: "row" }}>
       <Stack gap="4" direction={{ base: "row", lg: "column" }}>
-        <For each={props.images}>
+        <For each={attachments}>
           {(image) => (
-            <Box width="24" height="24" borderRadius="l2" overflow="hidden">
-              <Image image={image} />
-            </Box>
+            <button onClick={() => setPreview(image)}>
+              <Box
+                width="24"
+                height="24"
+                borderRadius="l2"
+                overflow="hidden"
+                borderWidth={2}
+                borderColor={image === preview() ? "accent.default" : undefined}
+                cursor="pointer"
+              >
+                <Image image={image} />
+              </Box>
+            </button>
           )}
         </For>
       </Stack>

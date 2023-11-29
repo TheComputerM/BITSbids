@@ -1,7 +1,6 @@
 ---
 import { Container, Divider, Flex, HStack } from "styled-system/jsx";
-import ChatInput from "./_/chat-input";
-import ChatMessage from "./_/chat-message";
+import { ChatWindow } from "./_/chat-window";
 import AppLayout from "~/layouts/AppLayout.astro";
 import { TbChevronLeft } from "solid-icons/tb";
 import UserAvatar from "~/components/user-avatar";
@@ -11,6 +10,7 @@ import { getUser } from "~/lib/api/user";
 
 const session = (await Astro.locals.auth.validate())!;
 const user = await getUser(session.user.userId);
+const { chatroom } = Astro.params;
 ---
 
 <AppLayout title="Chatroom">
@@ -28,11 +28,7 @@ const user = await getUser(session.user.userId);
 
   <Container>
     <Flex direction="column" gap="10" h="calc(100vh - 7.5rem)">
-      <Flex gap="6" direction="column" mt="4" flexGrow={1}>
-        <ChatMessage message="Hi" fromUser={true} />
-        <ChatMessage message="Hello There" />
-      </Flex>
-      <ChatInput />
+      <ChatWindow chatroomId={chatroom!} client:only />
     </Flex>
   </Container>
 </AppLayout>

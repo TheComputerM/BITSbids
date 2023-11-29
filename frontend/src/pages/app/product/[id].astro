@@ -7,9 +7,10 @@ import AppLayout from "~/layouts/AppLayout.astro";
 import { getProduct, getProductBids } from "~/lib/api/product";
 import ImageGallery from "./_/image-gallery";
 import BidCard from "./_/bid-card";
-import { Button } from "~/components/ui/button";
 import { Badge } from "~/components/ui/badge";
-import { TbCoins, TbGavel } from "solid-icons/tb";
+import Countdown from "./_/countdown";
+import PlaceBidButton from "./_/place-bid";
+import { ChatWithSeller } from "./_/chat-with-seller";
 
 const { id } = Astro.params;
 const [product, bids] = await Promise.all([
@@ -35,6 +36,7 @@ const [product, bids] = await Promise.all([
           </Heading>
         </Stack>
         <Text color="fg.muted">{product.description}</Text>
+        <Countdown endingAt={product.endingAt} client:only />
         <Stack>
           <Text textStyle="sm" color="fg.emphasized" fontWeight="medium">
             Share
@@ -46,22 +48,18 @@ const [product, bids] = await Promise.all([
           </HStack>
         </Stack>
         <Divider />
-        <Button size="xl">
-          Buy Instantly:
-          <TbCoins />
-          {product.autoSellPrice}
-        </Button>
-        <Button size="xl">
-          Place a Bid
-          <TbGavel />
-        </Button>
+        <Stack>
+          <ChatWithSeller product={product} client:idle />
+          <PlaceBidButton client:idle />
+        </Stack>
       </Stack>
     </Stack>
     <br />
     <Divider />
     <br />
     <Stack>
-      {bids.map((bid) => <BidCard bid={bid} client:idle />)}
+      <Heading as="h2" textStyle="2xl">Latest Bids</Heading>
+      {bids.map((bid) => <BidCard bid={bid} />)}
     </Stack>
   </Container>
 </AppLayout>

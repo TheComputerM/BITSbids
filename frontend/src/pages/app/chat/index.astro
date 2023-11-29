@@ -1,7 +1,14 @@
 ---
 import AppLayout from "~/layouts/AppLayout.astro";
+import { Chatrooms } from "./_/rooms";
+import { Container, Stack } from "styled-system/jsx";
 ---
 
 <AppLayout title="Chats">
-
+  <br />
+  <Container>
+    <Stack>
+      <Chatrooms client:load />
+    </Stack>
+  </Container>
 </AppLayout>

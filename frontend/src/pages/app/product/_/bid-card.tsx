@@ -1,9 +1,13 @@
+import { formatDistanceToNow } from "date-fns";
+import { TbCoins } from "solid-icons/tb";
 import type { Component } from "solid-js";
-import { Flex, HStack } from "styled-system/jsx";
+import { Flex } from "styled-system/jsx";
 import { Text } from "~/components/ui/typography";
-import UserAvatar from "~/components/user-avatar";
 
 const BidCard: Component<{ bid: Bid }> = ({ bid }) => {
+  const placedAt = formatDistanceToNow(new Date(bid.createdAt), {
+    addSuffix: true
+  });
   return (
     <Flex
       justify="space-between"
@@ -13,13 +17,13 @@ const BidCard: Component<{ bid: Bid }> = ({ bid }) => {
       py="2"
       borderRadius="l1"
     >
-      <HStack>
-        <Text>{bid.amount}</Text>
-        <Text>{bid.createdAt}</Text>
-      </HStack>
-      <div>
-        <UserAvatar user={bid.bidder} />
-      </div>
+      <Text display="flex" alignItems="center" gap="1" textStyle="xl" fontWeight="bold">
+        {bid.amount}
+        <TbCoins />
+      </Text>
+      <Text color="fg.subtle">
+        placed {placedAt}
+      </Text>
     </Flex>
   );
 };
