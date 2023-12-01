@@ -1,6 +1,7 @@
 import type { Component } from "solid-js";
 import { css } from "styled-system/css";
 import { Text } from "~/components/ui/typography";
+import { Flex } from "styled-system/jsx";
 
 interface ChatMessageProps {
   fromUser?: boolean;
@@ -9,6 +10,7 @@ interface ChatMessageProps {
 
 const ChatMessage: Component<ChatMessageProps> = (props) => {
   return (
+    
     <div
       class={css({
         alignSelf: props.fromUser ? "end" : "start",
@@ -35,6 +37,7 @@ const ChatMessage: Component<ChatMessageProps> = (props) => {
         12:00pm
       </Text>
     </div>
+    
   );
 };
 

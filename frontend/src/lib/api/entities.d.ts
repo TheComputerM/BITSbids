@@ -31,3 +31,10 @@ interface Chatroom {
   product: Product;
   buyer: User;
 }
+
+interface Message {
+  id: string;
+  sender: User;
+  room: Chatroom;
+  content: string;
+}
