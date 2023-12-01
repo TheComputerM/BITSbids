@@ -1,12 +1,15 @@
 package com.bits;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.jboss.resteasy.reactive.RestHeader;
 
 import com.bits.entities.Chatroom;
+import com.bits.entities.Message;
 import com.bits.entities.Product;
 import com.bits.entities.User;
+import com.bits.projections.MessageChatroomView;
 
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.GET;
@@ -29,7 +32,7 @@ public class ChatroomResource {
 
   @GET
   @Path("/{roomId}")
-  public Response getChatroom(String roomId) {
+  public Response getChatroom(UUID roomId) {
     return Response.ok(Chatroom.findById(roomId)).build();
   }
 
@@ -48,5 +51,13 @@ public class ChatroomResource {
     chatroom.buyer = user;
     chatroom.persist();
     return Response.ok(chatroom.id).build();
+  }
+
+  @GET
+  @Path("/{roomId}/messages")
+  public Response getMessages(UUID roomId){
+    List<MessageChatroomView> messages = Message.find("from Message where room.id = ?1 order by sentAt",roomId).project(MessageChatroomView.class).list();
+    return Response.ok(messages).build();
+
   }
 }
