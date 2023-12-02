@@ -5,24 +5,56 @@ import { Input } from "~/components/ui/input";
 import { IconButton } from "~/components/ui/icon-button";
 import { TbSend } from "solid-icons/tb";
 import { createWS } from "@solid-primitives/websocket";
-import { type Component, createSignal, For } from "solid-js";
+import { type Component, createSignal, For, onMount } from "solid-js";
+import { getUser } from "~/lib/api/user";
+import { getChatrooms, getMessages } from "~/lib/api/chatroom";
 
-const ChatWindow: Component<{ chatroomId: string }> = (props) => {
+const ChatWindow: Component<{ chatroomId: string; user: any }> = (props) => {
   const sessionId = localStorage.getItem("session")!;
+
   const ws = createWS(
     `ws://localhost:8080/ws/chatroom/${props.chatroomId}/${sessionId}`
   );
   const [input, setInput] = createSignal("");
   const [messages, setMessages] = createSignal<string[]>([]);
 
+  onMount(() => {
+    getMessages(props.chatroomId).then((data) => {
+      console.log(data);
+      setMessages(data.map(x => x.content));
+    });
+  });
+
   ws.onmessage = (event) => {
-    const message = event.data
+    const message: string = event.data;
+    console.log(message);
     setMessages((oldMessages) => [...oldMessages, message]);
   };
 
-  function sendMessage() {
+  async function sendMessage() {
+    try {
+      const message = {
+        sender: props.user,
+        room: await getChatrooms(props.chatroomId),
+        content: input(),
+      };
+
+      //console.log(input());
+      const response = await fetch("http://127.0.0.1:8080/api/messages", {
+        method: "POST",
+        body: JSON.stringify(message),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (response.ok) {
+        console.log("success");
+      }
+    } catch (error) {
+      console.error(error);
+    }
     ws.send(input());
-    setInput('');
+    setInput("");
   }
 
   return (
@@ -32,8 +64,18 @@ const ChatWindow: Component<{ chatroomId: string }> = (props) => {
       </Flex>
       <HStack>
         <Input
+          id="input"
           value={input()}
-          onChange={(e) => setInput(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key == "Enter") {
+              //@ts-ignore
+              setInput(e.target.value);
+              sendMessage();
+            } else {
+              // @ts-ignore
+              setInput(e.target.value);
+            }
+          }}
           placeholder="Message"
         />
         <IconButton onClick={sendMessage}>

@@ -5,12 +5,14 @@ import AppLayout from "~/layouts/AppLayout.astro";
 import { TbChevronLeft } from "solid-icons/tb";
 import UserAvatar from "~/components/user-avatar";
 import { Text } from "~/components/ui/typography";
-import { iconButton } from "styled-system/recipes";
+import { iconButton, input } from "styled-system/recipes";
 import { getUser } from "~/lib/api/user";
 
 const session = (await Astro.locals.auth.validate())!;
 const user = await getUser(session.user.userId);
 const { chatroom } = Astro.params;
+
+
 ---
 
 <AppLayout title="Chatroom">
@@ -28,7 +30,7 @@ const { chatroom } = Astro.params;
 
   <Container>
     <Flex direction="column" gap="10" h="calc(100vh - 7.5rem)">
-      <ChatWindow chatroomId={chatroom!} client:only />
+      <ChatWindow chatroomId={chatroom!} user={user!} client:only/>
     </Flex>
   </Container>
 </AppLayout>
