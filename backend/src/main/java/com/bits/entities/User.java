@@ -19,6 +19,12 @@ public class User extends PanacheEntityBase {
 
   public Integer balance;
 
+  public String phone;
+  
+  public String email;
+
+  public String hostel;
+
   public static User findBySession(String session) {
     User user = (User) getEntityManager().createNativeQuery(
         String.format("select * from users where id = (select user_id from user_session where id = '%s')", session),

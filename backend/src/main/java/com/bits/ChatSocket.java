@@ -3,6 +3,9 @@ package com.bits;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import com.bits.entities.Message;
+import com.bits.entities.User;
+
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.websocket.OnClose;
 import jakarta.websocket.OnError;
@@ -43,6 +46,10 @@ public class ChatSocket {
   @OnMessage
   public void onMessage(String content, @PathParam("chatroom") String chatroom,
       @PathParam("userSession") String userSession) {
+    Message m = new Message();
+    m.content = content;
+    m.sender = User.findBySession(userSession);
+    m.persist();
     broadcast(chatroom, content);
   }
 
